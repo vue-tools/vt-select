@@ -1,0 +1,78 @@
+.ui-select__option {
+    display: none;
+}
+.ui-select__wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.ui-select__input {
+    display: block;
+    padding: 3px 35px 3px 10px;
+    width: 100%;
+    height: 36px;
+    color: #1f2d3d;
+    font-size: 14px;
+    font-family: "Helvetica Neue", Helvetica, "Microsoft YaHei", SimSun, '\5b8b\4f53', sans-serif;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #c0ccda;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+}
+.ui-select__input--large {
+    height: 42px;
+    font-size: 16px;
+}
+.ui-select__input--mini {
+    height: 30px;
+    font-size: 13px;
+}
+.ui-select__input:hover {
+    border-color: #8492a6;
+}
+.ui-select__input:focus {
+    border-color: #20a0ff;
+}
+.ui-select__input::placeholder {
+    color: #99a9bf;
+}
+.ui-select__input[disabled] {
+    color: #bbb;
+    cursor: not-allowed;
+    border-color: #d3dce6;
+    background-color: #eff2f7;
+}
+.ui-select__icon {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 35px;
+    height: 100%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+.ui-select__icon:before {
+    content: ' ';
+    width: 0;
+    height: 0;
+    margin-top: 8px;
+    border: 6px solid #c0ccda;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    transition: transform .3s, margin-top .3s;
+}
+.ui-select__icon--active:before {
+    margin-top: -8px;
+    transform: rotate(180deg);
+}
+.ui-select__dropdown {
+    width: 100%;
+    max-height: 194px;
+    overflow-y: auto;
+}
