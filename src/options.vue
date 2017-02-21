@@ -8,6 +8,7 @@
     export default {
         props: {
             value: String,
+            label: String,
             disabled: Boolean,
             selected: Boolean
         },
@@ -32,9 +33,10 @@
         mounted() {
             if(this.checkParent()) {
                 this.index = this.$parent.options.length
-
+                
                 this.$parent.options.push({
                     value: this.value,
+                    label: this.label,
                     disabled: this.disabled,
                     selected: this.selected,
                     vnode: this.$slots.default,

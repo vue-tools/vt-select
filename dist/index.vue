@@ -16,6 +16,7 @@
         },
         data() {
             return {
+                label: '',
                 options: [],
                 activeIcon: false
             }
@@ -31,7 +32,10 @@
                     <Dropdown trigger="click"
                         onShow={() => this.activeIcon = true}
                         onHide={() => this.activeIcon = false}
-                        onClick={(item) => this.$emit('input', item.$el.dataset.value)}
+                        onClick={(item) => {
+                            this.label = item.$el.dataset.label
+                            this.$emit('input', item.$el.dataset.value)
+                        }}
                     >
                         {createInputElement(h, this)}
                         <DropdownMenu class="ui-select__dropdown">
@@ -49,15 +53,23 @@
             })
 
             if(this.value !== ''  && values.indexOf(this.value) === -1) {
+                this.label = ''
                 this.$emit('input', '')
             }
         },
         mounted() {
-            this.options.map((item) => {
-                if (item.selected) {
-                    this.$emit('input', item.value)
+            for (let item of this.options) {
+                if (this.value === item.value) {
+                    this.label = item.label
+                    break
                 }
-            })
+
+                if (item.selected) {
+                    this.label = item.label
+                    this.$emit('input', item.value)
+                    break
+                }
+            }
         },
         watch: {
             value(val, oldVal) {
@@ -66,6 +78,13 @@
                 }
                 
                 if(this.options.map((item) => item.value).indexOf(val) === -1) {
+                    for (let item of this.options) {
+                        if (item.value === oldVal) {
+                            this.label = item.label
+                            break
+                        }
+                    }
+                    
                     this.$emit('input', oldVal)
                 }
             }
@@ -86,7 +105,7 @@
 
         return (
             <div class="ui-select__wrap">
-                <input class={className} type="text" name={context.name} form={context.form} value={context.value}
+                <input class={className} type="text" name={context.name} form={context.form} value={context.label}
                     autocomplete="off" readonly="readonly" disabled={context.disabled} placeholder={context.placeholder} />
                 <span class={{'ui-select__icon': true, 'ui-select__icon--active': context.activeIcon}}></span>
             </div>
@@ -95,7 +114,7 @@
 
     function createDropdownItem(h, options) {
         return options.map((item) => {
-            return (<DropdownItem data-value={item.value} style={{'display': item.display}} disabled={item.disabled}>{item.vnode}</DropdownItem>)
+            return (<DropdownItem data-value={item.value} data-label={item.label} style={{'display': item.display}} disabled={item.disabled}>{item.vnode}</DropdownItem>)
         })
     }
 </script>
