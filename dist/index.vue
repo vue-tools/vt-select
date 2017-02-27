@@ -86,6 +86,13 @@
                     }
                     
                     this.$emit('input', oldVal)
+                } else {
+                    for (let item of this.options) {
+                        if (val === item.value) {
+                            this.label = item.label
+                            break
+                        }
+                    }
                 }
             }
         },
