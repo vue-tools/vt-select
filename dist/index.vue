@@ -73,7 +73,7 @@
         },
         watch: {
             value(val, oldVal) {
-                if(!val.length) {
+                if(!String(val).length) {
                     return
                 }
                 
