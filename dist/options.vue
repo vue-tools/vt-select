@@ -7,7 +7,7 @@
 <script>
     export default {
         props: {
-            value: String,
+            value: [String, Number, Boolean],
             label: String,
             disabled: Boolean,
             selected: Boolean
