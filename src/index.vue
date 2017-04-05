@@ -9,7 +9,7 @@
             name: String,
             size: String,
             form: String,
-            value: String,
+            value: [String, Number, Boolean],
             disabled: Boolean,
             autofocus: Boolean,
             placeholder: String
