@@ -48,18 +48,18 @@
         updated() {
             let values = this.options.map((item) => {
                 if(item.display !== 'none') {
-                    return item.value
+                    return String(item.value)
                 }
             })
 
-            if(this.value !== ''  && values.indexOf(this.value) === -1) {
+            if(this.value !== ''  && values.indexOf(String(this.value)) === -1) {
                 this.label = ''
                 this.$emit('input', '')
             }
         },
         mounted() {
             for (let item of this.options) {
-                if (this.value === item.value) {
+                if (this.value == item.value) {
                     this.label = item.label
                     break
                 }
@@ -73,13 +73,15 @@
         },
         watch: {
             value(val, oldVal) {
-                if(!String(val).length) {
+                val = String(val)
+
+                if(!val.length) {
                     return
                 }
                 
-                if(this.options.map((item) => item.value).indexOf(val) === -1) {
+                if(this.options.map((item) => String(item.value)).indexOf(val) === -1) {
                     for (let item of this.options) {
-                        if (item.value === oldVal) {
+                        if (item.value == oldVal) {
                             this.label = item.label
                             break
                         }
@@ -88,7 +90,7 @@
                     this.$emit('input', oldVal)
                 } else {
                     for (let item of this.options) {
-                        if (val === item.value) {
+                        if (val == item.value) {
                             this.label = item.label
                             break
                         }
