@@ -75,9 +75,9 @@
             value(val, oldVal) {
                 val = String(val)
 
-                if(!val.length) {
-                    return
-                }
+                // if(!val.length) {
+                //     return
+                // }
                 
                 if(this.options.map((item) => String(item.value)).indexOf(val) === -1) {
                     for (let item of this.options) {
